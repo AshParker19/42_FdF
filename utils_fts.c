@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:56:18 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/08 20:25:43 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:51:54 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_start(char *map_name)
 	full_path = ft_strjoin(PATH, map_name);
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
-		exit(ft_error());
+		exit(ft_error(WRONG_MAP_NAME));
 	free (full_path);
 	return (fd);
 }

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   hooks_fts.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 16:41:51 by anshovah          #+#    #+#             */
-/*   Updated: 2023/03/11 18:01:15 by anshovah         ###   ########.fr       */
+/*   Created: 2023/05/10 17:38:09 by anshovah          #+#    #+#             */
+/*   Updated: 2023/05/16 14:07:54 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "FdF.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_exit(t_win *window)
 {
-	t_list	*current;
-
-	while (*lst)
-	{
-		current = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = current;
-	}
-	*lst = NULL;
+	if (window)
+		mlx_destroy_window(window->mlx_ptr, window->win_ptr);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:29:35 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/10 12:02:36 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:08:02 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ t_point	*ft_into_list(t_point *head, int fd, int y, int x)
 		ft_free_matrix(matrix);
 		y++;
 	}
-	head = ft_extend(head, ft_scaling_factor(y, x, HEIGHT, WIDTH));
-	head = ft_row_connector(head, (y * x), col_max);
+	head = ft_row_connector(head, (y * x), col_max,
+			ft_scaling_factor(y, x));
 	close(fd);
 	return (head);
 }
 
-t_point	*ft_row_connector(t_point *head, int num_nodes, int col_max)
+t_point	*ft_row_connector(t_point *head, int num_nodes, int col_max, int sf)
 {
 	t_point	*current;
 	t_point	*finder;
@@ -87,6 +87,7 @@ t_point	*ft_row_connector(t_point *head, int num_nodes, int col_max)
 		current->down = finder;
 		current = current->next;
 	}
+	ft_extend(head, sf, 0, 0);
 	return (head);
 }
 

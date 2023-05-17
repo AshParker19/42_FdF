@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:17:59 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/10 12:23:42 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:37:37 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_horizontal_lines(t_img *img, t_point *map)
 		save_next = save_down;
 		while (save_next->x_break == 0)
 		{
-			ft_line_drawer(img, (t_line){0x00FF00, save_next->y, save_next->x,
+			ft_line_drawer(img, (t_line){ft_color(save_next), save_next->y, save_next->x,
 				save_next->next->y, save_next->next->x,
 				abs((save_next->next->y) - (save_next->y)),
 				abs((save_next->next->x) - (save_next->x))});
@@ -47,14 +47,13 @@ void	ft_vertical_lines(t_img *img, t_point *map)
 	save_next = map;
 	while (save_next)
 	{
-		save_down = save_next;
-		while (save_down->down)
+		save_down = save_next->down;
+		if (save_down)
 		{
-			ft_line_drawer(img, (t_line){0x00FF00, save_next->y, save_next->x,
-				save_down->down->y, save_down->down->x,
-				abs((save_down->down->y) - (save_next->y)),
-				abs((save_down->down->x) - (save_next->x))});
-			save_down = save_down->down;
+			ft_line_drawer(img, (t_line){ft_color(save_next), save_next->y, save_next->x,
+				save_down->y, save_down->x,
+				abs(save_down->y - save_next->y),
+				abs(save_down->x - save_next->x)});
 		}
 		save_next = save_next->next;
 	}
@@ -89,17 +88,31 @@ void	ft_line_drawer(t_img *data, t_line line)
 	}				
 }
 
-t_point	*ft_extend(t_point *head, int sf)
+void	ft_extend(t_point *head, int sf, int max_y, int max_x)
 {
-	t_point	*current;
+	int			temp_x;
+	t_point		*current;
+	int			range;
+	float		sf_z;
 
+	range = ft_sf_altitude(head);
+	sf_z = MAR / (float)range;
 	current = head;
 	while (current)
 	{
-		current->y *= sf;
-		current->x *= sf;
-		// current->z *= sf;
+		current->y *= sf / 1.6;
+		current->x *= sf / 1.6;
+		current->z = (int)(current->z * sf_z);
+		temp_x = current->x;
+		current->x = (temp_x - current->y) * cos(0.6);
+		current->y = (temp_x + current->y) * sin(0.6) - current->z;
+		if (current->x > max_x)
+			max_x = current->x;
+		if (current->y > max_y)
+		max_y = current->y;
+		head->x_total += current->x;
+		head->point_count++;
 		current = current->next;
 	}
-	return (head);
+	ft_align_properly(head, head->point_count, (t_coor){max_y, max_x, sf});
 }

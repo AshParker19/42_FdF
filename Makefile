@@ -3,7 +3,7 @@ CC = gcc
 
 #SRC = $(wildcard *.c)
 SRC = fdf.c llists_fts.c mlx_fts.c utils_fts.c draw_fts.c	\
-		utils_fts2.c
+		utils_fts2.c hooks_fts.c
 OBJ :=$(SRC:.c=.o)
 
 # libft
