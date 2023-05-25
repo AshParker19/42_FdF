@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/10 15:26:29 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/10 17:01:26 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "stdlib.h"
 
-void	fdf(char *map_name)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	t_point	*map_info;
+	unsigned int	i;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
-	else
-		return (ft_error(WRONG_AGR_NUM));
+	i = -1;
+	while (s[++i])
+		f(i, &s[i]);
 }

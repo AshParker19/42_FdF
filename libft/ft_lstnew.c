@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/11 13:56:02 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/11 14:27:23 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+t_list	*ft_lstnew(void *content)
 {
-	t_point	*map_info;
+	t_list	*new_node;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
-	else
-		return (ft_error(WRONG_AGR_NUM));
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }

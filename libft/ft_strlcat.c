@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/05 16:16:24 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/05 16:40:42 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	t_point	*map_info;
+	size_t	i;
+	size_t	j;
+	size_t	dst_len;
+	size_t	src_len;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
-	else
-		return (ft_error(WRONG_AGR_NUM));
+	i = 0;
+	j = 0;
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	j = dst_len;
+	if (size == 0 || size <= dst_len)
+		return (src_len + size);
+	while (src[i] && i < size - dst_len - 1)
+	{
+		dst[j] = src[i];
+		j++;
+		i++;
+	}	
+	dst[j] = 0;
+	return (dst_len + src_len);
 }

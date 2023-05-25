@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/06 17:23:15 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/06 18:12:03 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	t_point	*map_info;
+	size_t	i;
+	size_t	j;
+	char	*big_c;
+	char	*lil_c;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
-	else
-		return (ft_error(WRONG_AGR_NUM));
+	big_c = (char *)big;
+	lil_c = (char *)little;
+	i = -1;
+	if (!*little)
+		return (big_c);
+	while (big_c[++i] && i < len)
+	{
+		j = 0;
+		while (big_c[i + j] == lil_c[j] && i + j < len)
+		{
+			if (lil_c[j + 1] == '\0')
+				return (big_c + i);
+			j++;
+		}
+	}	
+	return (0);
 }

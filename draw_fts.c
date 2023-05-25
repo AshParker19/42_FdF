@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:17:59 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/16 17:37:37 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:59:36 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void	ft_horizontal_lines(t_img *img, t_point *map)
 		save_next = save_down;
 		while (save_next->x_break == 0)
 		{
-			ft_line_drawer(img, (t_line){ft_color(save_next), save_next->y, save_next->x,
-				save_next->next->y, save_next->next->x,
+			ft_line_drawer(img, (t_line){(save_next->y), (save_next->x),
+				(save_next->next->y), (save_next->next->x),
 				abs((save_next->next->y) - (save_next->y)),
-				abs((save_next->next->x) - (save_next->x))});
+				abs((save_next->next->x) - (save_next->x))},
+				ft_color(save_next, save_next->next));
 			save_next = save_next->next;
 		}
 		save_down = save_down->down;
@@ -50,16 +51,17 @@ void	ft_vertical_lines(t_img *img, t_point *map)
 		save_down = save_next->down;
 		if (save_down)
 		{
-			ft_line_drawer(img, (t_line){ft_color(save_next), save_next->y, save_next->x,
-				save_down->y, save_down->x,
+			ft_line_drawer(img, (t_line){(save_next->y), (save_next->x),
+				(save_down->y), (save_down->x),
 				abs(save_down->y - save_next->y),
-				abs(save_down->x - save_next->x)});
+				abs(save_down->x - save_next->x)},
+				ft_color(save_next, save_down));
 		}
 		save_next = save_next->next;
 	}
 }
 
-void	ft_line_drawer(t_img *data, t_line line)
+void	ft_line_drawer(t_img *data, t_line line, int color)
 {
 	int	sx;
 	int	sy;
@@ -71,7 +73,7 @@ void	ft_line_drawer(t_img *data, t_line line)
 	p1 = line.dx - line.dy;
 	while (1)
 	{
-		ft_mlx_pixel_put(data, line.y0, line.x0, line.color);
+		ft_mlx_pixel_put(data, line.y0, line.x0, color);
 		if (line.x0 == line.x1 && line.y0 == line.y1)
 			break ;
 		p2 = 2 * p1;
@@ -109,7 +111,7 @@ void	ft_extend(t_point *head, int sf, int max_y, int max_x)
 		if (current->x > max_x)
 			max_x = current->x;
 		if (current->y > max_y)
-		max_y = current->y;
+			max_y = current->y;
 		head->x_total += current->x;
 		head->point_count++;
 		current = current->next;

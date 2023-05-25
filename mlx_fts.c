@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:41:50 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/15 14:13:18 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:10:35 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	ft_on_screen(t_point *map)
 {
 	t_win	window;
 	t_img	image;
+	t_all	*tall;
 
+	tall = ft_calloc(1, (sizeof(t_all)));
 	window = ft_new_window(WIDTH, HEIGHT, "FdF");
 	if (!window.mlx_ptr || !window.win_ptr)
 		return ;
@@ -45,6 +47,10 @@ void	ft_on_screen(t_point *map)
 	ft_draw(&image, map);
 	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr,
 		image.img_ptr, 0, 0);
-	mlx_hook(window.win_ptr, DestroyNotify, KeyPressMask, ft_exit, &window);
+	tall->win = &window;
+	tall->map = map;
+	tall->img = &image;
+	mlx_hook(window.win_ptr, DestroyNotify, KeyPressMask, ft_exit, tall);
+	mlx_key_hook(window.win_ptr, ft_esc, tall);
 	mlx_loop(window.mlx_ptr);
 }

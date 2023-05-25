@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_putaddress.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/13 17:36:01 by anshovah          #+#    #+#             */
+/*   Updated: 2023/05/03 19:21:16 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+void	ft_putaddress(unsigned long addr, int *len)
 {
-	t_point	*map_info;
-
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
+	if (!addr)
+		ft_putstr("(nil)", len);
 	else
-		return (ft_error(WRONG_AGR_NUM));
+	{
+		if (addr < 16)
+		{
+			ft_putstr("0x", len);
+			ft_putchar(HEX_LOWER[addr % 16], len);
+			return ;
+		}
+		ft_putaddress(addr / 16, len);
+		ft_putchar(HEX_LOWER[addr % 16], len);
+	}
 }

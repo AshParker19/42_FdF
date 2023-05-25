@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/06 16:26:27 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/06 16:55:02 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_point	*map_info;
+	size_t			i;
+	unsigned char	*s_copy;
+	unsigned char	c1;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
-	else
-		return (ft_error(WRONG_AGR_NUM));
+	c1 = c;
+	s_copy = (unsigned char *)s;
+	i = -1;
+	while (++i < n)
+	{
+		if (s_copy[i] == c1)
+			return (s_copy + i);
+	}
+	return (NULL);
 }

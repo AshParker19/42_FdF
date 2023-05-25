@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/06 16:59:48 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/06 17:15:09 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_point	*map_info;
+	size_t			i;
+	char			*s1_c;
+	char			*s2_c;
+	unsigned char	c1;
+	unsigned char	c2;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
-	else
-		return (ft_error(WRONG_AGR_NUM));
+	i = 0;
+	s1_c = (char *)s1;
+	s2_c = (char *)s2;
+	if (!n)
+		return (0);
+	while (s1_c[i] == s2_c[i] && i < n - 1)
+		i++;
+	c1 = s1_c[i];
+	c2 = s2_c[i];
+	return (c1 - c2);
 }

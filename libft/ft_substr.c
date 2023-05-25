@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/07 16:58:06 by anshovah          #+#    #+#             */
+/*   Updated: 2023/03/07 19:01:12 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_point	*map_info;
+	size_t	i;
+	size_t	j;
+	char	*sub;
 
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
+	i = 0;
+	j = 0;
+	if (start >= ft_strlen(s))
+		sub = malloc(1);
+	else if (len >= ft_strlen(s))
+		sub = malloc(ft_strlen(s) - start + 1);
 	else
-		return (ft_error(WRONG_AGR_NUM));
+		sub = malloc(len + 1);
+	if (!sub)
+		return (NULL);
+	while (s[i])
+	{
+		if (i >= start && j < len)
+			sub[j++] = s[i];
+		i++;
+	}
+	sub[j] = 0;
+	return (sub);
 }

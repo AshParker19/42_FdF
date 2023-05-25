@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:59:13 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/16 18:02:18 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:12:04 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_sf_altitude(t_point *head)
 			max_z = current->z;
 		current = current->next;
 	}
+	if (max_z == 0 && min_z == 0)
+		return (-1);
 	return (max_z - min_z);
 }
 
@@ -88,10 +90,14 @@ void	ft_align_properly(t_point *head, int pc, t_coor coor)
 	}
 }
 
-int	ft_color(t_point *node)
+int	ft_color(t_point *node1, t_point *node2)
 {
-	if (node->z == 0)
-		return (0x00FF00);
-	else 
-		return (0x00FF);	
+	if (node1->z == 0 && node2->z == 0)
+		return (PINK);
+	else if (node1->z > 0 && node2->z > 0)
+		return (LIGHT_PURPLE);
+	else if (node1->z < 0 && node2->z < 0)
+		return (LIGHT_RED);
+	else
+		return (MINT);
 }

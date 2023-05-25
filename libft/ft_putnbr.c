@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:03:43 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:52 by anshovah         ###   ########.fr       */
+/*   Created: 2023/03/13 16:43:35 by anshovah          #+#    #+#             */
+/*   Updated: 2023/05/03 19:23:25 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FdF.h"
+#include "libft.h"
 
-void	fdf(char *map_name)
+void	ft_putnbr(long n, int *len)
 {
-	t_point	*map_info;
-
-	map_info = NULL;
-	map_info = ft_into_list(map_info, ft_start(map_name),
-			(t_coor){0, 0, 0}, 0);
-	ft_on_screen(map_info);
-}	
-
-int	main(int ac, char *av[])
-{
-	if (ac == 2)
-		fdf(av[1]);
+	if (n < 0)
+	{
+		ft_putchar('-', len);
+		n *= -1;
+	}
+	if (n > 9)
+	{
+		ft_putnbr(n / 10, len);
+		ft_putnbr(n % 10, len);
+	}
 	else
-		return (ft_error(WRONG_AGR_NUM));
+		ft_putchar(n + 48, len);
 }

@@ -1,9 +1,8 @@
 NAME = fdf
 CC = gcc 
 
-#SRC = $(wildcard *.c)
 SRC = fdf.c llists_fts.c mlx_fts.c utils_fts.c draw_fts.c	\
-		utils_fts2.c hooks_fts.c
+		utils_fts2.c hooks_fts.c utils_fts3.c
 OBJ :=$(SRC:.c=.o)
 
 # libft
@@ -24,7 +23,7 @@ $(NAME): $(OBJ)
 	@echo "$(GREEN)It's happened!$(DEF)"
 
 %.o: %.c
-	@$(CC)  -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	@$(CC) -Wall -Werror -Wextra -g -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
