@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:06:15 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:14:43 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:02:00 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "./libft/libft.h"
 # include "./mlx_linux/mlx.h"
 # include <X11/X.h>
-# include <X11/ap_keysym.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -34,13 +33,13 @@
 # define WRONG_AGR_NUM 1
 # define WRONG_MAP_NAME 2
 
-// max altitude range
-# define MAR 100
+// altitude multiplier
+# define AM 100
 
 // screen resolution parameters
 // cluster 1
 # define WIDTH 1920
-# define HEIGHT 1080
+# define HEIGHT 1180
 // cluster 2
 // # define WIDTH  		960
 // # define HEIGHT 		540
@@ -53,23 +52,42 @@
 # define YELLOW2			0xFFFF99
 
 // colors for the error message
-# define GREEN "\033[0;32m"
-# define RED "\033[0;31m"
-# define YELLOW "\x1b[33m"
-# define CYAN "\x1b[36m"
-# define PURPLE "\x1b[35m"
-# define RESET "\033[0m"
+# define GREEN 				"\033[0;32m"
+# define RED 				"\033[0;31m"
+# define YELLOW 			"\x1b[33m"
+# define CYAN 				"\x1b[36m"
+# define PURPLE 			"\x1b[35m"
+# define RESET 				"\033[0m"
+
+// keys
+# define ESCAPE			65307
+# define LEFT_ARROW		65361
+# define RIGHT_ARROW 	65363
+# define UP_ARROW		65362
+# define DOWN_ARROW		65364
+# define ZOOM_IN		49
+# define ZOOM_OUT		50
+# define LEVEL_UP		51
+# define LEVEL_DOWN		52
 
 // coordinates
 typedef struct s_point
 {
-	int				y;
-	int				x;
-	int				z;
-	int				color;
+	double			y;
+	double			x;
+	double			z;
 	int				x_break;
-	int				x_total;
-	int				point_count;
+	int				sf;
+	int				sf_z;
+	int				max_y;
+	int				max_x;
+	int				max_z;
+	int				iso_mod;
+	int				orig_y;
+	int				orig_x;
+	int				shift_y;
+	int				shift_x;
+	int				color;
 	struct s_point	*next;
 	struct s_point	*down;
 }					t_point;
@@ -107,9 +125,16 @@ typedef struct s_line
 	int				y0;
 	int				x1;
 	int				y1;
-	int				dx;
-	int				dy;
+	int				base_color;
+	int				end_color;
 }					t_line;
+
+// rotation
+typedef struct s_rot
+{
+	double			y_rot;
+	double			x_rot;
+}					t_rot;
 
 // pointers to everything
 typedef struct s_all
@@ -117,49 +142,56 @@ typedef struct s_all
 	t_win			*win;
 	t_point			*map;
 	t_img			*img;
+	t_rot			rot;
 }					t_all;
 
 // linked lists functions
-t_point				*ft_new_tail(t_point *head, t_coor coor, int col_max);
-t_point				*ft_into_list(t_point *head, int fd,
-						t_coor coor, int col_max);
-t_point				*ft_row_connector(t_point *head, int num_nodes, int col_max,
-						int sf);
-void				ft_free_everything(t_point *head, t_all *all);
+t_point		*ft_new_tail(t_point *head, t_coor coor, int col_max);
+t_point		*ft_into_list(t_point *head, int fd,
+				t_coor coor, int col_max);
+t_point		*ft_row_connector(t_point *head, int num_nodes, int col_max);
+void		ft_free_everything(t_point *head, t_all *all);
 
 // mlx functions
-t_win				ft_new_window(int w, int h, char *str);
-void				ft_mlx_pixel_put(t_img *data, int x, int y, int color);
-void				ft_on_screen(t_point *map);
+t_win		ft_new_window(int w, int h, char *str);
+void		ft_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		ft_on_screen(t_point *map);
 
 // drawing functions
-void				ft_draw(t_img *img, t_point *map);
-void				ft_line_drawer(t_img *data, t_line line, int color);
-void				ft_horizontal_lines(t_img *img, t_point *map);
-void				ft_vertical_lines(t_img *img, t_point *map);
-void				ft_extend(t_point *node, int sf, int max_y, int max_x);
+void		ft_draw(t_all *tall);
+void		ft_line_drawer(t_img *data, t_line line, t_coor coor);
+void		ft_horizontal_lines(t_img *img, t_point *map);
+void		ft_vertical_lines(t_img *img, t_point *map);
+void		ft_extend(t_point *node, int sf, int max_y, int max_x);
 
 // hooks
-int					ft_exit(t_all *all);
-int					ft_esc(int keycode, t_all *all);
+int			ft_exit(t_all *all);
+int			ft_keys(int keycode, t_all *all);
+void		ft_projection(t_all *all);
+void		ft_translation(int keycode, t_all *all);
+void		ft_zoom_in(int keycode, t_all *all);
+void		ft_zoom_out(t_point *map, int y_center, int x_center);
+void		ft_level(int keycode, t_all *all);
+void		ft_delete_and_build(t_all *all);
+
+// // rotation
+void		ft_rotation(int keycode, t_all *all);
+void		ft_rotate_y(t_point *map, double angle, double x, double z);
+void		ft_rotate_x(t_point *map, double angle, double y, double z);
 
 // utils
-int					ft_nl(char *str);
-int					ft_count_columns(char **matrix);
-void				ft_free_matrix(char **matrix);
-int					ft_start(char *map_name);
-int					ft_get_direction(int a, int b);
-int					ft_error(int flag);
-int					ft_scaling_factor(int map_h, int map_w);
-int					ft_sf_altitude(t_point *head);
-void				ft_align_properly(t_point *head, int point_count,
-						t_coor coor);
-int					ft_color(t_point *node1, t_point *node2);
+void		ft_instruction(void);
+void		ft_instruction2(void);
+int			ft_nl(char *str);
+int			ft_count_columns(char **matrix);
+void		ft_free_matrix(char **matrix);
+int			ft_start(char *map_name);
+int			ft_color(float z);
+int			ft_gradient(int base_color, int end_color);
+int			ft_error(int flag);
+int			ft_scaling_factor(int map_h, int map_w);
+int			ft_altitude(t_point *head);
+void		ft_isometric(t_all *tall);
+void		ft_reset(t_all *tall);
 
 #endif
-
-// command to execute Norminette to all the files but not to mlx folder
-/* 
-find . -maxdepth 1 -type f ! -name "Makefile"
-! -name "mlx_linux" -exec norminette {} \;
-*/

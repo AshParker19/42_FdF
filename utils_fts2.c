@@ -6,11 +6,49 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:59:13 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:12:04 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:46:23 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
+
+void	ft_instruction(void)
+{
+	ft_printf(CYAN "╒≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡"
+		"≡≡≡≡≡≡≡╕" RESET"\n" CYAN "│" YELLOW "                   "
+		"NAVIGATION AND CONTROLS" "                   " CYAN "│" RESET "\n"
+		CYAN "╘≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡"
+		"≡≡≡≡≡≡≡╛" RESET "\n" CYAN "╔═══════════════════════════════════════════"
+		"══════════════════╗" RESET "\n" CYAN "║" PURPLE "      "
+		GREEN "P --->" PURPLE "  switch the image projection to isometric      "
+		CYAN " ║" RESET "\n" CYAN "║" PURPLE "        Press one more time to swi"
+		"tch back to paralel        " CYAN "║" RESET "\n" CYAN "╟───────────────"
+		"──────────────────────────────────────────────╢" RESET "\n" CYAN "║"
+		GREEN "          1 --> " PURPLE "zoom in              " GREEN "2 --> "
+		PURPLE "zoom out          " CYAN "║" RESET "\n" CYAN "╟───────────────"
+		"──────────────────────────────────────────────╢" RESET "\n" CYAN "║"
+		PURPLE "                         Translation                         "
+		CYAN "║" RESET "\n" CYAN "║" GREEN "  W -->" PURPLE "  UP    "
+		GREEN "S -->" PURPLE "  DOWN     " GREEN "D -->" PURPLE "  RIGHT    "
+		GREEN "A -->" PURPLE "  LEFT  " CYAN " ║" RESET "\n" CYAN
+		"╟─────────────────────────────────────────────────────────────╢"
+		RESET "\n" CYAN "║" PURPLE "         x-axis rotation              y-axi"
+		"s rotation" CYAN "        ║" RESET "\n" CYAN "║" GREEN "         "
+		"LEFT/RIGHT ARROW       "
+		"      UP/DOWN ARROW" CYAN "          ║" RESET "\n" CYAN "╟─────────────"
+		"────────────────────────────────────────────────╢" RESET "\n" CYAN "║");
+	ft_instruction2();
+}
+
+void	ft_instruction2(void)
+{
+	ft_printf(PURPLE "                     Change the altitude" CYAN
+		"                     ║" RESET "\n" CYAN "║"
+		GREEN "   3 --> " PURPLE "increase volume             "
+		GREEN "4 --> " PURPLE "decrease volume" CYAN "   ║" RESET "\n"
+		CYAN "╚═════════════════════════════════════════════════════════════╝"
+		RESET "\n");
+}
 
 int	ft_error(int flag)
 {
@@ -50,15 +88,15 @@ int	ft_scaling_factor(int map_h, int map_w)
 		return (sf_h);
 }
 
-int	ft_sf_altitude(t_point *head)
+int	ft_altitude(t_point *head)
 {
 	t_point	*current;
 	int		max_z;
 	int		min_z;
 
 	current = head;
-	max_z = INT_MIN;
-	min_z = INT_MAX;
+	max_z = -1000;
+	min_z = 1000;
 	while (current)
 	{
 		if (current->z < min_z)
@@ -67,37 +105,8 @@ int	ft_sf_altitude(t_point *head)
 			max_z = current->z;
 		current = current->next;
 	}
+	head->max_z = max_z;
 	if (max_z == 0 && min_z == 0)
 		return (-1);
 	return (max_z - min_z);
-}
-
-void	ft_align_properly(t_point *head, int pc, t_coor coor)
-{		
-	t_point	*current;
-	int		y_offset;
-	int		x_offset;
-
-	current = head;
-	while (current)
-	{	
-		x_offset = (WIDTH - coor.x_coor) / 2 - (head->x_total / pc)
-			+ (coor.x_coor / 2);
-		y_offset = (HEIGHT - coor.y_coor) / 2;
-		current->x += x_offset;
-		current->y += y_offset;
-		current = current->next;
-	}
-}
-
-int	ft_color(t_point *node1, t_point *node2)
-{
-	if (node1->z == 0 && node2->z == 0)
-		return (PINK);
-	else if (node1->z > 0 && node2->z > 0)
-		return (LIGHT_PURPLE);
-	else if (node1->z < 0 && node2->z < 0)
-		return (LIGHT_RED);
-	else
-		return (MINT);
 }

@@ -6,11 +6,40 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:29:35 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 18:09:30 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:51:14 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
+
+t_point	*ft_into_list(t_point *head, int fd, t_coor coor, int col_max)
+{
+	char	*line;
+	char	**matrix;
+
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		coor.x_coor = 0;
+		matrix = ft_split(line, ' ');
+		col_max = ft_count_columns(matrix);
+		while (matrix[coor.x_coor] && coor.x_coor != col_max)
+		{
+			head = ft_new_tail(head, (t_coor){coor.y_coor, coor.x_coor,
+					ft_atoi(matrix[coor.x_coor])}, col_max);
+			coor.x_coor++;
+		}
+		ft_free_matrix(matrix);
+		free (line);
+		coor.y_coor++;
+	}
+	head->sf = ft_scaling_factor(coor.y_coor, coor.x_coor);
+	head = ft_row_connector(head, (coor.y_coor * coor.x_coor), col_max);
+	close(fd);
+	return (head);
+}
 
 t_point	*ft_new_tail(t_point *head, t_coor coor, int col_max)
 {
@@ -37,36 +66,7 @@ t_point	*ft_new_tail(t_point *head, t_coor coor, int col_max)
 	}	
 }
 
-t_point	*ft_into_list(t_point *head, int fd, t_coor coor, int col_max)
-{
-	char	*line;
-	char	**matrix;
-
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		coor.x_coor = 0;
-		matrix = ft_split(line, ' ');
-		col_max = ft_count_columns(matrix);
-		while (matrix[coor.x_coor] && coor.x_coor != col_max)
-		{
-			head = ft_new_tail(head, (t_coor){coor.y_coor, coor.x_coor,
-					ft_atoi(matrix[coor.x_coor])}, col_max);
-			coor.x_coor++;
-		}
-		ft_free_matrix(matrix);
-		free (line);
-		coor.y_coor++;
-	}
-	head = ft_row_connector(head, (coor.y_coor * coor.x_coor), col_max,
-			ft_scaling_factor(coor.y_coor, coor.x_coor));
-	close(fd);
-	return (head);
-}
-
-t_point	*ft_row_connector(t_point *head, int num_nodes, int col_max, int sf)
+t_point	*ft_row_connector(t_point *head, int num_nodes, int col_max)
 {
 	t_point	*current;
 	t_point	*finder;
@@ -84,6 +84,5 @@ t_point	*ft_row_connector(t_point *head, int num_nodes, int col_max, int sf)
 		current->down = finder;
 		current = current->next;
 	}
-	ft_extend(head, sf, 0, 0);
 	return (head);
 }

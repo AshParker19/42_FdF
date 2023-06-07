@@ -1,8 +1,9 @@
 NAME = fdf
 CC = gcc 
 
-SRC = fdf.c llists_fts.c mlx_fts.c utils_fts.c draw_fts.c	\
-		utils_fts2.c hooks_fts.c utils_fts3.c
+SRC = fdf.c llists_fts.c mlx_fts.c utils_fts.c draw_fts.c		\
+		utils_fts2.c hooks_fts.c hooks_fts2.c rotation_fts.c	\
+		utils_fts3.c
 OBJ :=$(SRC:.c=.o)
 
 # libft
@@ -34,3 +35,5 @@ fclean : clean
 	@make fclean -sC ./libft
 
 re : fclean all
+
+.PHONY: all clean fclean re

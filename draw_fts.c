@@ -6,16 +6,16 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:17:59 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/25 13:59:36 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:42:00 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FdF.h"
 
-void	ft_draw(t_img *img, t_point *map)
+void	ft_draw(t_all *all)
 {
-	ft_horizontal_lines(img, map);
-	ft_vertical_lines(img, map);
+	ft_horizontal_lines(all->img, all->map);
+	ft_vertical_lines(all->img, all->map);
 }
 
 void	ft_horizontal_lines(t_img *img, t_point *map)
@@ -29,11 +29,12 @@ void	ft_horizontal_lines(t_img *img, t_point *map)
 		save_next = save_down;
 		while (save_next->x_break == 0)
 		{
-			ft_line_drawer(img, (t_line){(save_next->y), (save_next->x),
-				(save_next->next->y), (save_next->next->x),
-				abs((save_next->next->y) - (save_next->y)),
-				abs((save_next->next->x) - (save_next->x))},
-				ft_color(save_next, save_next->next));
+			ft_line_drawer(img, (t_line){(save_next->y + map->shift_y),
+				(save_next->x + map->shift_x),
+				(save_next->next->y + map->shift_y),
+				(save_next->next->x + map->shift_x),
+				(save_next->color), (save_next->next->color)},
+				(t_coor){0, 0, 0});
 			save_next = save_next->next;
 		}
 		save_down = save_down->down;
@@ -51,70 +52,66 @@ void	ft_vertical_lines(t_img *img, t_point *map)
 		save_down = save_next->down;
 		if (save_down)
 		{
-			ft_line_drawer(img, (t_line){(save_next->y), (save_next->x),
-				(save_down->y), (save_down->x),
-				abs(save_down->y - save_next->y),
-				abs(save_down->x - save_next->x)},
-				ft_color(save_next, save_down));
+			ft_line_drawer(img, (t_line){(save_next->y + map->shift_y),
+				(save_next->x + map->shift_x), (save_down->y + map->shift_y),
+				(save_down->x + map->shift_x),
+				(save_next->color), (save_down->color)},
+				(t_coor){0, 0, 0});
 		}
 		save_next = save_next->next;
 	}
 }
 
-void	ft_line_drawer(t_img *data, t_line line, int color)
+void	ft_line_drawer(t_img *data, t_line line, t_coor coor)
 {
-	int	sx;
-	int	sy;
-	int	p1;
-	int	p2;
+	double	dy;
+	double	dx;
+	double	y;
+	double	x;
 
-	sx = ft_get_direction(line.x0, line.x1);
-	sy = ft_get_direction(line.y0, line.y1);
-	p1 = line.dx - line.dy;
-	while (1)
+	dx = line.x1 - line.x0;
+	dy = line.y1 - line.y0;
+	if (fabs(dx) > fabs(dy))
+		coor.y_coor = fabs(dx);
+	else
+		coor.y_coor = fabs(dy);
+	x = line.x0;
+	y = line.y0;
+	coor.x_coor = 0;
+	while (coor.x_coor <= coor.y_coor)
 	{
-		ft_mlx_pixel_put(data, line.y0, line.x0, color);
-		if (line.x0 == line.x1 && line.y0 == line.y1)
-			break ;
-		p2 = 2 * p1;
-		if (p2 > -(line.dy))
-		{
-			p1 -= line.dy;
-			line.x0 += sx;
-		}
-		if (p2 < line.dx)
-		{
-			p1 += line.dx;
-			line.y0 += sy;
-		}
-	}				
+		ft_mlx_pixel_put(data, (int)y, (int)x, line.base_color);
+		line.base_color = ft_gradient(line.base_color, line.end_color);
+		x += (dx / coor.y_coor);
+		y += (dy / coor.y_coor);
+		coor.x_coor++;
+	}
 }
 
 void	ft_extend(t_point *head, int sf, int max_y, int max_x)
 {
-	int			temp_x;
 	t_point		*current;
 	int			range;
 	float		sf_z;
 
-	range = ft_sf_altitude(head);
-	sf_z = MAR / (float)range;
+	range = ft_altitude(head);
+	sf_z = AM / (float)range;
+	head->sf_z = sf_z;
 	current = head;
 	while (current)
 	{
-		current->y *= sf / 1.6;
 		current->x *= sf / 1.6;
-		current->z = (int)(current->z * sf_z);
-		temp_x = current->x;
-		current->x = (temp_x - current->y) * cos(0.6);
-		current->y = (temp_x + current->y) * sin(0.6) - current->z;
+		current->y *= sf / 1.6;
+		current->z *= sf_z;
+		current->orig_x = current->x;
+		current->orig_y = current->y;
+		current->color = ft_color(current->z);
 		if (current->x > max_x)
 			max_x = current->x;
 		if (current->y > max_y)
 			max_y = current->y;
-		head->x_total += current->x;
-		head->point_count++;
 		current = current->next;
 	}
-	ft_align_properly(head, head->point_count, (t_coor){max_y, max_x, sf});
+	head->max_y = max_y;
+	head->max_x = max_x;
 }

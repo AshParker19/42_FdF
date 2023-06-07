@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:56:18 by anshovah          #+#    #+#             */
-/*   Updated: 2023/05/13 13:51:54 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/07 21:46:40 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,23 @@ int	ft_start(char *map_name)
 	fd = open(full_path, O_RDONLY);
 	if (fd == -1)
 		exit(ft_error(WRONG_MAP_NAME));
+	else
+		ft_instruction();
 	free (full_path);
 	return (fd);
 }
 
-int	ft_get_direction(int a, int b)
+void	ft_free_everything(t_point *head, t_all *all)
 {
-	if (a < b)
-		return (1);
-	return (-1);
+	t_point	*current;
+	t_point	*next;
+
+	current = head;
+	while (current)
+	{
+		next = current->next;
+		free (current);
+		current = next;
+	}
+	free (all);
 }
