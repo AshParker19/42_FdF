@@ -30,6 +30,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 GREEN = \033[0;32m
 RED = \033[0;31m
+ORANGE = \033[0;33m
 DEF = \033[0m
 
 ###*******************************************************************************************###
@@ -50,7 +51,10 @@ OBJS_bonus :=$(SRCS_bonus:.c=.o)
 
 $(NAME) : $(OBJS)
 	@ar -crs $@ $^
-	@echo "$(GREEN)libft is here!$(DEF)"
+	@echo "$(ORANGE)┌───────────────────────────────────────────────────┐$(DEF)"
+	@echo "$(ORANGE)│                 $(GREEN)LIBFT IS COMPILED$(ORANGE)\
+	                 │$(DEF)"
+	@echo "$(ORANGE)├───────────────────────────────────────────────────┤$(DEF)"
 	
 all: $(NAME)
 

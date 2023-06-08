@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 21:40:54 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/07 21:57:13 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:35:50 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	ft_projection(t_all *all)
 		all->map->iso_mod = 1;
 		ft_isometric(all);
 	}
-	ft_delete_and_build(all);
+	ft_destroy_and_build(all);
 }

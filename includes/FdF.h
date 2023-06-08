@@ -6,15 +6,15 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:06:15 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/07 22:02:00 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:36:06 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "./libft/libft.h"
-# include "./mlx_linux/mlx.h"
+# include "../libft/libft.h"
+# include "../mlx_linux/mlx.h"
 # include <X11/X.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -82,6 +82,7 @@ typedef struct s_point
 	int				max_y;
 	int				max_x;
 	int				max_z;
+	int				min_z;
 	int				iso_mod;
 	int				orig_y;
 	int				orig_x;
@@ -172,7 +173,7 @@ void		ft_translation(int keycode, t_all *all);
 void		ft_zoom_in(int keycode, t_all *all);
 void		ft_zoom_out(t_point *map, int y_center, int x_center);
 void		ft_level(int keycode, t_all *all);
-void		ft_delete_and_build(t_all *all);
+void		ft_destroy_and_build(t_all *all);
 
 // // rotation
 void		ft_rotation(int keycode, t_all *all);

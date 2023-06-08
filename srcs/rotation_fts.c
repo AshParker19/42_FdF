@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:26:28 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/07 15:23:38 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:13:38 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	ft_rotation(int keycode, t_all *all)
 	ft_rotate_x(all->map, all->rot.x_rot, 0, 0);
 	all->rot.y_rot = 0.0;
 	all->rot.x_rot = 0.0;
-	ft_delete_and_build(all);
+	ft_destroy_and_build(all);
 }

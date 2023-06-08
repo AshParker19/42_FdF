@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 17:38:09 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/07 21:59:41 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:13:15 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_zoom_in(int keycode, t_all *all)
 	}
 	else if (keycode == ZOOM_OUT)
 		ft_zoom_out(all->map, y_center, x_center);
-	ft_delete_and_build(all);
+	ft_destroy_and_build(all);
 }
 
 void	ft_zoom_out(t_point *map, int y_center, int x_center)
@@ -71,7 +71,7 @@ void	ft_translation(int keycode, t_all *all)
 		all->map->shift_x += 10;
 	else if (keycode == 'a')
 		all->map->shift_x -= 10;
-	ft_delete_and_build(all);
+	ft_destroy_and_build(all);
 }
 
 int	ft_keys(int keycode, t_all *all)

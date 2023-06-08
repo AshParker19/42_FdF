@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:42:39 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/07 16:24:02 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:13:27 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void	ft_level(int keycode, t_all *all)
 		}
 		ft_isometric(all);
 	}
-	ft_delete_and_build(all);
+	ft_destroy_and_build(all);
 }
 
-void	ft_delete_and_build(t_all *all)
+void	ft_destroy_and_build(t_all *all)
 {
 	ft_bzero(all->img->addr, (HEIGHT * WIDTH * sizeof(all->img->bpp)));
 	ft_draw(all);

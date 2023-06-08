@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:59:13 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/07 21:46:23 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 12:34:48 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int	ft_altitude(t_point *head)
 		current = current->next;
 	}
 	head->max_z = max_z;
+	head->min_z = min_z;
 	if (max_z == 0 && min_z == 0)
 		return (-1);
 	return (max_z - min_z);
