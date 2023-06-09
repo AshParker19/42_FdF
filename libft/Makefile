@@ -63,18 +63,14 @@ bonus: $(OBJS_bonus)
 
 clean:
 	@rm -f $(OBJS) $(OBJS_bonus)
-#	@echo "$(RED)Removed!$(DEF)"
-
 
 %.o : %.c
 	@gcc $(CFLAGS) -c $< -o $@
 
 fclean: clean
 	@rm -f $(NAME)
-#	@echo "$(RED)Removed!$(DEF)"
 
 re: fclean all
-#	@echo "$(GREEN)Redone!$(DEF)"
 
 #####***************************************************************************************#####
 ###**										Thank you!										**###

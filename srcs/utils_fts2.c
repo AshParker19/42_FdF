@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:59:13 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/08 12:34:48 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:02:55 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_instruction2(void)
 		"                     ║" RESET "\n" CYAN "║"
 		GREEN "   3 --> " PURPLE "increase volume             "
 		GREEN "4 --> " PURPLE "decrease volume" CYAN "   ║" RESET "\n"
+		CYAN "║" RED "Do not use if any other changes were made"
+		"(undefined behavior)"CYAN "║\n"
 		CYAN "╚═════════════════════════════════════════════════════════════╝"
 		RESET "\n");
 }

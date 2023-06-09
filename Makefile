@@ -44,9 +44,8 @@ $(NAME): $(OBJ)
 	@$(LIBFT)
 	@$(CC) $(OBJ) -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib \
 	-Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-	@make clean -sC ./libft
-	@echo "$(ORANGE)│                 $(PURPLE)[=====>     ] 50%\
-	                 $(ORANGE)│$(DEF)"
+	@echo "$(ORANGE)│                 $(PURPLE)[==========] 100%$(ORANGE)\
+	                 │$(DEF)"
 	@echo "$(ORANGE)├───────────────────────────────────────────────────┤"
 	@echo "│                  $(GREEN)FDF IS COMPILED$(ORANGE)                  │"
 	@echo "$(ORANGE)├───────────────────────────────────────────────────┤$(DEF)"

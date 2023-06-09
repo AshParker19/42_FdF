@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:42:39 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/08 11:13:27 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:17:15 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_level(int keycode, t_all *all)
 	{
 		while (current)
 		{	
-			if (current->z < all->map->max_z * 20)
+			if (current->z >= 0 && current->z < all->map->max_z * 20)
 				current->z *= 1.1;
 			current = current->next;
 		}
@@ -85,7 +85,8 @@ void	ft_level(int keycode, t_all *all)
 	{
 		while (current)
 		{
-			current->z /= 1.1;
+			if (current->z >= 0)
+				current->z /= 1.1;
 			current = current->next;
 		}
 		ft_isometric(all);

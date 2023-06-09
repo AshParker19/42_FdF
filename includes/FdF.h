@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 19:06:15 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/08 13:36:06 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:31:31 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,22 @@
 # define WIDTH 1920
 # define HEIGHT 1180
 // cluster 2
-// # define WIDTH  		960
-// # define HEIGHT 		540
+// # define WIDTH  		1260
+// # define HEIGHT 		940
 
 // colors for the image
-# define PINK	 			0xFF69B4
-# define LIGHT_PURPLE		0xCC99FF
-# define LIGHT_RED			0xFFC0C0
-# define MINT				0xAAFFC3
-# define YELLOW2			0xFFFF99
+# define PINK	 		0xFF69B4
+# define LIGHT_RED		0xFFC0C0
+# define MINT			0xAAFFC3
+# define LEMON			0xFFFF99
 
 // colors for the error message
-# define GREEN 				"\033[0;32m"
-# define RED 				"\033[0;31m"
-# define YELLOW 			"\x1b[33m"
-# define CYAN 				"\x1b[36m"
-# define PURPLE 			"\x1b[35m"
-# define RESET 				"\033[0m"
+# define GREEN 			"\033[0;32m"
+# define RED 			"\033[0;31m"
+# define YELLOW 		"\x1b[33m"
+# define CYAN 			"\x1b[36m"
+# define PURPLE 		"\x1b[35m"
+# define RESET 			"\033[0m"
 
 // keys
 # define ESCAPE			65307

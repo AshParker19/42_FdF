@@ -6,7 +6,7 @@
 /*   By: anshovah <anshovah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 21:40:54 by anshovah          #+#    #+#             */
-/*   Updated: 2023/06/08 13:35:50 by anshovah         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:16:46 by anshovah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_color(float z)
 	if (z == 0)
 		return (MINT);
 	else if (z < 0)
-		return (LIGHT_PURPLE);
+		return (LEMON);
 	else
 		return (PINK);
 }
