@@ -50,7 +50,7 @@
 # define MINT			0xAAFFC3
 # define LEMON			0xFFFF99
 
-// colors for the error message
+// colors for ft_printf
 # define GREEN 			"\033[0;32m"
 # define RED 			"\033[0;31m"
 # define YELLOW 		"\x1b[33m"
