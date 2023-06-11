@@ -37,12 +37,8 @@
 # define AM 100
 
 // screen resolution parameters
-// cluster 1
 # define WIDTH 1920
 # define HEIGHT 1180
-// cluster 2
-// # define WIDTH  		1260
-// # define HEIGHT 		940
 
 // colors for the image
 # define PINK	 		0xFF69B4
