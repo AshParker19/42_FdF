@@ -1,4 +1,4 @@
-The fisrt graphical project I've done. The aim of this project is to read the map in fdf format and display it in 3D format.
+The first graphical project I've done. The aim of this project is to read the map in fdf format and display it in 3D format.
 
 ![Screenshot from 2023-06-09 12-14-50](https://github.com/AshParker19/42_FdF/assets/117525743/74c5b98c-bb93-434d-92dd-30cb1cc1dc0b)
 
