@@ -56,7 +56,7 @@ I tried different drawing algorithms, none of them was working perfectly with th
 
 ---
 
-Some useful links:
+## Sources:
 
 Bresenham's drawing algorithm - https://youtu.be/RGB-wlatStc
 
