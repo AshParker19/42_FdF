@@ -11,6 +11,12 @@ One of the reasons probably was that this was the first project of rank02 I did,
 I've learned how to use the minilibx library, how to work with 2D and 3D graphics, how to use the Bresenham's and DDA drawing algorithms, how to use the 2D transformations, and a lot more. I improwed my Linked list skills and discovered structures in a completely new way.
 
 ---
+![42-ezgif com-video-to-gif-converter](https://github.com/AshParker19/42_FdF/assets/117525743/a868aa2e-f3f9-451b-8e2a-28e62900895c)
+
+![world-ezgif com-video-to-gif-converter](https://github.com/AshParker19/42_FdF/assets/117525743/1f7c1f73-bd4e-4f3e-9226-b19f66697dee)
+
+![himalaya-ezgif com-video-to-gif-converter](https://github.com/AshParker19/42_FdF/assets/117525743/4b5dbbe7-ef80-4997-8b7b-3372b3e88a8c)
+
 
 ## `The flow of the program:`
 
