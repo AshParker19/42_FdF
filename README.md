@@ -1,7 +1,5 @@
 ## The first graphical project I've done. The aim of this project is to read the map in fdf format and display it in 3D format.
 
-![Screenshot from 2023-06-09 12-14-50](https://github.com/AshParker19/42_FdF/assets/117525743/74c5b98c-bb93-434d-92dd-30cb1cc1dc0b)
-
 ---
 
 _So far, this project was my biggest struggle of the course._
@@ -10,12 +8,18 @@ One of the reasons probably was that this was the first project of rank02 I did,
 
 I've learned how to use the minilibx library, how to work with 2D and 3D graphics, how to use the Bresenham's and DDA drawing algorithms, how to use the 2D transformations, and a lot more. I improwed my Linked list skills and discovered structures in a completely new way.
 
----
-![42-ezgif com-video-to-gif-converter](https://github.com/AshParker19/42_FdF/assets/117525743/a868aa2e-f3f9-451b-8e2a-28e62900895c)
+--- 
 
-![world-ezgif com-video-to-gif-converter](https://github.com/AshParker19/42_FdF/assets/117525743/1f7c1f73-bd4e-4f3e-9226-b19f66697dee)
+<p align="center">
+  <img src="https://github.com/AshParker19/42_FdF/assets/117525743/a868aa2e-f3f9-451b-8e2a-28e62900895c" alt="42-ezgif.com-video-to-gif-converter"/>
+</p>
+<p align="center">
+  <img src="https://github.com/AshParker19/42_FdF/assets/117525743/1f7c1f73-bd4e-4f3e-9226-b19f66697dee" alt="world-ezgif.com-video-to-gif-converter"/>
+</p>
+<p align="center">
+  <img src="https://github.com/AshParker19/42_FdF/assets/117525743/4b5dbbe7-ef80-4997-8b7b-3372b3e88a8c" alt="himalaya-ezgif.com-video-to-gif-converter"/>
+</p>
 
-![himalaya-ezgif com-video-to-gif-converter](https://github.com/AshParker19/42_FdF/assets/117525743/4b5dbbe7-ef80-4997-8b7b-3372b3e88a8c)
 
 
 ## `The flow of the program:`
